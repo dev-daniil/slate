@@ -34,73 +34,38 @@ curl "api_endpoint_here" \
 
 Для получения API ключа откройте [бота Telegram](https://t.me/d33pmail_bot), перейдите в профиль и скопируйте содержимое в поле "API ключ".
 
-# d33pmail
+# Почтовое API
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Купить почту
 
 ```shell
 curl "http://example.com/api/kittens" \
   -H "Authorization: meowmeowmeow"
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> Результат
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+  "error": false,
+  "data: [
+    "email:pass",
+    "email:pass"
+  ]
+}
 ```
 
-This endpoint retrieves all kittens.
+Метод выполняет покупку почт.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET https://d33pmail.com/api/v1/email`
 
-### Query Parameters
+### Query параметры
 
-Parameter | Default | Description
+Параметр | Обязательный | Описание
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+count | Да | Указывает количество почт к покупке (от 1 до 2000)
 
 ## Get a Specific Kitten
 
