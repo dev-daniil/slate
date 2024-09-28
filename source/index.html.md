@@ -39,8 +39,8 @@ curl "api_endpoint_here" \
 ## Купить почту
 
 ```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
+curl --location 'https://d33pmail.com/api/v2/email?count=2' \
+--header 'x-api-key: api_key'
 ```
 
 > Результат
@@ -48,7 +48,7 @@ curl "http://example.com/api/kittens" \
 ```json
 {
   "error": false,
-  "data: [
+  "data": [
     "email:pass",
     "email:pass"
   ]
@@ -57,9 +57,9 @@ curl "http://example.com/api/kittens" \
 
 Метод выполняет покупку почт.
 
-### HTTP Request
+### HTTP Запрос
 
-`GET https://d33pmail.com/api/v1/email`
+`GET https://d33pmail.com/api/v2/email`
 
 ### Query параметры
 
@@ -67,107 +67,85 @@ curl "http://example.com/api/kittens" \
 --------- | ------- | -----------
 count | Да | Указывает количество почт к покупке (от 1 до 2000)
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## Получить список почтовых ящиков
 
 ```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
+curl --location 'https://d33pmail.com/api/v2/email/boxes' \
+--header 'x-api-key: api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "email": "",
+    "password": ""
+}'
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> Результат
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "error": false,
+  "data": [
+    {
+      "name": "INBOX"
+    }
+  ]
 }
 ```
 
-This endpoint retrieves a specific kitten.
+Метод выполняет получение почтовых ящиков на указанном почтовом адресе.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+### HTTP Запрос
 
-### HTTP Request
+`POST https://d33pmail.com/api/v2/email/boxes`
 
-`GET http://example.com/kittens/<ID>`
+### Тело запроса
 
-### URL Parameters
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+email | Да | Электронный адрес
+password | Да | Пароль от электронного адреса
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+## Получить список писем в ящике
 
 ```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
+curl --location 'https://d33pmail.com/api/v2/email/messages' \
+--header 'x-api-key: api_key' \
+--header 'Content-Type: application/json' \
+--data '{
+    "email": "",
+    "password": "",
+    "box": ""
+}'
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
+> Результат
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+  "error": false,
+  "data": [
+    {
+      "from": "test@gmail.com",
+      "subject": "Greeting",
+      "html": "<div>Hello!</div>",
+      "text": "Hello!",
+      "date": ""
+    }
+  ]
 }
 ```
 
-This endpoint deletes a specific kitten.
+Метод выполняет получение писем из почтового ящика, который вы указали в теле запроса
 
-### HTTP Request
+### HTTP Запрос
 
-`DELETE http://example.com/kittens/<ID>`
+`POST https://d33pmail.com/api/v2/email/messages`
 
-### URL Parameters
+### Тело запроса
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+Параметр | Обязательный | Описание
+--------- | ------- | -----------
+email | Да | Электронный адрес
+password | Да | Пароль от электронного адреса
+box | Да | Почтовый ящик
 
