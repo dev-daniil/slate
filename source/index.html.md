@@ -113,7 +113,8 @@ curl --location 'https://d33pmail.com/api/v2/email/messages' \
 --data '{
     "email": "",
     "password": "",
-    "box": ""
+    "box": "",
+    "page": 1
 }'
 ```
 
@@ -147,6 +148,7 @@ curl --location 'https://d33pmail.com/api/v2/email/messages' \
 email | Да | Электронный адрес
 password | Да | Пароль от электронного адреса
 box | Да | Почтовый ящик
+page | Да | Страница
 
 # Пользовательское API
 
