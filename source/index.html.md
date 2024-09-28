@@ -149,3 +149,29 @@ email | Да | Электронный адрес
 password | Да | Пароль от электронного адреса
 box | Да | Почтовый ящик
 
+# Пользовательское API
+
+## Информация о пользователе
+
+```shell
+curl --location 'https://d33pmail.com/api/v1/user/me' \
+--header 'x-api-key: api_key'
+```
+
+> Результат
+
+```json
+{
+  "error": false,
+  "data": [
+    "balance": 200.00,
+    "id": 12
+  ]
+}
+```
+
+Метод возвращает информацию о владельце API токена, а так же его баланс.
+
+### HTTP Запрос
+
+`GET https://d33pmail.com/api/v1/user/me`
