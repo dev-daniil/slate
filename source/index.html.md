@@ -162,10 +162,10 @@ curl --location 'https://d33pmail.com/api/v1/user/me' \
 ```json
 {
   "error": false,
-  "data": [
+  "data": {
     "balance": 200.00,
     "id": 12
-  ]
+  }
 }
 ```
 
