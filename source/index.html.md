@@ -5,7 +5,6 @@ language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of
   - shell
 
 includes:
-  - errors
 
 search: true
 
